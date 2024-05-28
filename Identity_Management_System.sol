@@ -78,7 +78,11 @@ contract identity_management {
         identities_unhashed[msg.sender].father_name = father_name;
         identities_unhashed[msg.sender].phone_number = phone_number;
     }
-
+    // Function to get adresses of all the registered users by registered user only
+    function getAllIdentities(address user) public view returns (address[] memory) {
+        require(identities[user].isregistered && identities_unhashed[user].isregistered, "Sorry You are not part of this chain");
+        return identity_list;
+    }
     // Other users can only see the name of the owner of the address
     function getIdentity_by_other(
         address user
